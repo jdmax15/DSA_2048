@@ -180,7 +180,6 @@ public:
 
 int Board::countEmptyCells() const {
 
-	// Implement this function to count the number of empty cells in the board
 	int emptyCells = 0;
 	for (int i = 0; i < boardSize; i++) {
 		for (int j = 0; j < boardSize; j++) {
@@ -217,7 +216,27 @@ bool Board::canMove() const {
 
 
 vector<int> Board::merge(list<int> row) {
+
 	vector<int> mergedRow;
+	list<int>::iterator it = row.begin();
+
+	while (it != row.end()) {
+		list<int>::iterator next = std::next(it);
+		if ((next != row.end()) && (*it == *next)) {
+			mergedRow.push_back(*it *2);
+			currentScore+=(*it*2);
+			advance(it, 2);
+		} else {
+			mergedRow.push_back(*it);
+			advance(it, 1);
+		}
+
+	}
+	for (int i = mergedRow.size(); i < boardSize; i++) {
+		mergedRow.push_back(0);
+	}
+
+
 	// Implement this function to merge the non-zero values in the list 'row'
 	// based on the rules of the game and return the merged row as a vector of
 	// integers
@@ -229,8 +248,18 @@ void Board::makeMove(char direction) {
 	for (int i = 0; i < boardSize; i++) {
 		list<int> row;
 		for (int j = 0; j < boardSize; j++) {
-			if (direction == 'l' && grid[i][j] != 0)
+			if (direction == 'l' && grid[i][j] != 0) {
 				row.push_back(grid[i][j]);
+			}
+			else if (direction == 'r' && grid[i][j] != 0) {
+				row.push_front(grid[i][j]);
+			}
+			else if (direction == 'u' && grid[j][i] != 0) {
+				row.push_back(grid[j][i]);
+			}
+			else if (direction == 'd' && grid[j][i] != 0) {
+				row.push_front(grid[j][i]);
+			}
 
 			// Implement the logic to extract the row or column based on the
 			// direction of the move and store the non-zero values in the list
@@ -240,9 +269,18 @@ void Board::makeMove(char direction) {
 		if (!row.empty()) {
 			vector<int> merged = merge(row);
 			for (int j = 0; j < boardSize; j++) {
-				if (direction == 'l')
+				if (direction == 'l') {
 					grid[i][j] = merged[j];
-
+				} 
+				else if (direction == 'r') {
+					grid[i][boardSize - 1 - j] = merged[j];
+				} 
+				else if (direction == 'u') {
+					grid[j][i] = merged[j];
+				} 
+				else if (direction == 'd') {
+					grid[boardSize - 1 - j][i] = merged[j];
+				}
 				// Implement the logic to update the grid based on the direction
 				// of the move and the merged row or column
 			}
