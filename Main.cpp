@@ -13,6 +13,7 @@ using namespace std;
 #include "Board.h"
 #include "Game.h"
 #include "HumanPlayer.h"
+#include "RandomPlayer.h"
 #include "Player.h"
 
 int main() {
@@ -29,7 +30,7 @@ int main() {
 
 	cout << "Choose a player to play: " << endl;
 	cout << "1. Human Player" << endl;
-    //Add more option for different players 
+    cout << "2. Random Player" << endl;
 	cout << "Others: Quit" << endl;
 
 	int choice;
@@ -39,7 +40,11 @@ int main() {
 
 	if (choice == 1) {
 		p = new HumanPlayer;
-	} else {
+	} 
+	else if (choice == 2) {
+		p = new RandomPlayer;	
+	}
+	else {
 		return 0;
 	}
 
@@ -47,12 +52,11 @@ int main() {
 
 	Game game(board, p);
 
-	cout << "Empty cells: " << board->countEmptyCells() << endl; // ALSO ADDED THIS IN GAME.PLAY()
+	cout << "Empty cells: " << board->countEmptyCells() << endl;
 
 	game.play();
 
-	delete board;
-	delete p;
+
 
 	//	system("pause");
 	return 0;
