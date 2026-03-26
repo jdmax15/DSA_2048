@@ -11,7 +11,7 @@
 #include "Board.h"
 #include "Player.h"
 
-const int NUMBEROFGAMES = 10;
+const int NUMBEROFGAMES = 50;
 
 class Game {
 private:

@@ -8,25 +8,45 @@ using namespace std;
 #include <iostream>
 #include <cstdlib>
 #include <queue>
+#include <vector>
 
-struct Move {
+struct BestMove {
     char direction;
     int heuristic;
-    Move(char d, int h): direction(d), heuristic(h) {}
-    bool operator<(const Move& m) const {
+    BestMove(char d, int h): direction(d), heuristic(h) {}
+    bool operator<(const BestMove& m) const {
         return heuristic < m.heuristic;
     }
 };
 
 class BestFirstPlayer: public Player {
-	BestFirstPlayer() {
-		name = "Best First Player (Hueristic)";
-	}
-	char getMove(const Board&);
+	public:
+        BestFirstPlayer() {
+            name = "Best First Player (Hueristic)";
+        }
+        char getMove(const Board&);
 };
 
-char Player::getMove(const Board& board) {
+char BestFirstPlayer::getMove(const Board& board) {
 
-}
+    priority_queue<BestMove> moves;
+    vector<char> directions = {'u', 'd', 'l', 'r'};
+    for (int i = 0; i < directions.size(); i++) {
+        Board tempBoard(board);
+        if (tempBoard.canMove()) {
+            tempBoard.makeMove(directions[i]);
+            BestMove m((directions[i]), tempBoard.heuristic());
+            moves.push(m);
+        }
+    }
+
+    if (moves.size() > 0) {
+        return moves.top().direction;
+    } else {
+        cout << "Can't make move.\n";
+        return 'u';
+    }
+
+};
 
 #endif
