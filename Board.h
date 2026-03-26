@@ -237,9 +237,6 @@ vector<int> Board::merge(list<int> row) {
 	}
 
 
-	// Implement this function to merge the non-zero values in the list 'row'
-	// based on the rules of the game and return the merged row as a vector of
-	// integers
 	return mergedRow;
 }
 
@@ -261,9 +258,6 @@ void Board::makeMove(char direction) {
 				row.push_front(grid[j][i]);
 			}
 
-			// Implement the logic to extract the row or column based on the
-			// direction of the move and store the non-zero values in the list
-			// 'row'
 		}
 
 		if (!row.empty()) {

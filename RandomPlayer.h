@@ -1,9 +1,4 @@
-/*
- * HumanPlayer.h
- *
- *  Created on: 12/01/2026
- *      Author: dongmo
- */
+
 
 #ifndef RANDOMPLAYER_H_
 #define RANDOMPLAYER_H_
@@ -35,4 +30,4 @@ char RandomPlayer::getMove(const Board& board) {
 	return move;
 }
 
-#endif /* HUMANPLAYER_H_ */
+#endif
