@@ -176,6 +176,7 @@ public:
 	vector<int> merge(list<int> row);
 	int countEmptyCells() const;
 	bool canMove() const;
+	int heuristic() const;
 };
 
 int Board::countEmptyCells() const {
@@ -210,9 +211,6 @@ bool Board::canMove() const {
 	}
 	return false;
 }
-
-
-	
 
 
 vector<int> Board::merge(list<int> row) {
@@ -284,6 +282,10 @@ void Board::makeMove(char direction) {
 	currentSteps++;
 
 	return;
+}
+
+int Board::heuristic() const {
+	return currentScore;
 }
 
 #endif /* BOARD_H_ */

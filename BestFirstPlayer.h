@@ -7,6 +7,16 @@ using namespace std;
 #include "Player.h"
 #include <iostream>
 #include <cstdlib>
+#include <queue>
+
+struct Move {
+    char direction;
+    int heuristic;
+    Move(char d, int h): direction(d), heuristic(h) {}
+    bool operator<(const Move& m) const {
+        return heuristic < m.heuristic;
+    }
+};
 
 class BestFirstPlayer: public Player {
 	BestFirstPlayer() {
