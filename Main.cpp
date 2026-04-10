@@ -12,6 +12,7 @@ using namespace std;
 
 #include "Board.h"
 #include "Game.h"
+#include "MonteCarloPlayer.h"
 #include "BestFirstPlayer.h"
 #include "HumanPlayer.h"
 #include "RandomPlayer.h"
@@ -32,7 +33,9 @@ int main() {
 	cout << "Choose a player to play: " << endl;
 	cout << "1. Human Player" << endl;
     cout << "2. Random Player" << endl;
-	cout << "3. Best First Player (hueristic" << endl;
+	cout << "3. Best First Player 1 (hueristic)" << endl;
+	cout << "4. Best First Player 2 (hueristic)" << endl;
+	cout << "5. Monte Carlo Player" << endl;
 	cout << "Others: Quit" << endl;
 
 	int choice;
@@ -48,6 +51,9 @@ int main() {
 	}
 	else if (choice == 3) {
 		p = new BestFirstPlayer;
+	}
+	else if (choice == 5) {
+		p = new MonteCarloPlayer;
 	}
 	else {
 		return 0;
