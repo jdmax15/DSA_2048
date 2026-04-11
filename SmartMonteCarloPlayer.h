@@ -1,5 +1,5 @@
-#ifndef MONTECARLOPLAYER_H_
-#define MONTECARLOPLAYER_H_
+#ifndef SMARTMONTECARLOPLAYER_H_
+#define SMARTMONTECARLOPLAYER_H_
 
 using namespace std;
 
@@ -12,13 +12,12 @@ using namespace std;
 
 
 
-class MonteCarloPlayer: public Player {
+class SmartMonteCarloPlayer: public MonteCarloPlayer {
 	public:
-        MonteCarloPlayer() {
-            name = "MonteCarloPlayer (Hueristic)";
+        SmartMonteCarloPlayer() {
+            name = "SmartMonteCarloPlayer (Hueristic)";
         }
-        char getMove(const Board&);
-        double simulation(const Board&);
+        double simulation(const Board&) override;
 };
 
 char MonteCarloPlayer::getMove(const Board& board) {
