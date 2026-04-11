@@ -9,6 +9,7 @@ using namespace std;
 #include <cstdlib>
 #include <queue>
 #include <vector>
+#include "MonteCarloPlayer.h"
 
 
 
@@ -20,28 +21,9 @@ class SmartMonteCarloPlayer: public MonteCarloPlayer {
         double simulation(const Board&) override;
 };
 
-char MonteCarloPlayer::getMove(const Board& board) {
 
-    char bestMove;
-    double bestScore = -1.0;
-    vector<char> directions = {'u', 'd', 'l', 'r'};
 
-    for (int i = 0; i < directions.size(); i++) {
-        Board tempBoard(board);
-        tempBoard.makeMove(directions[i]);
-
-        double score = simulation(tempBoard);
-        
-        if (score > bestScore) {
-            bestScore = score;
-            bestMove = directions[i];
-        }
-    }
-    return bestMove;
-    
-};
-
-virtual double MonteCarloPlayer::simulation(const Board& board) {
+double MonteCarloPlayer::simulation(const Board& board) {
     int simulation_runs = 100;
     double total_score = 0.0;
     vector<char> directions = {'u', 'd', 'l', 'r'};

@@ -161,15 +161,13 @@ public:
 			 << " Total steps: " << currentSteps << "." << endl;
 		cout << "Current score per step: " << getScoreperStep() << "." << endl;
 	}
-
-	// Implement the following functions to complete the functionality of the Board class as part of practical tasks. 
-	// You can refer to the provided solution code for guidance.
 	
 	void makeMove(char direction);
 	vector<int> merge(list<int> row);
 	int countEmptyCells() const;
 	bool canMove() const;
 	int heuristic() const;
+	int heuristic2() const;
 };
 
 int Board::countEmptyCells() const {
@@ -266,8 +264,6 @@ void Board::makeMove(char direction) {
 				else if (direction == 'd') {
 					grid[boardSize - 1 - j][i] = merged[j];
 				}
-				// Implement the logic to update the grid based on the direction
-				// of the move and the merged row or column
 			}
 		}
 	}
@@ -280,5 +276,25 @@ void Board::makeMove(char direction) {
 int Board::heuristic() const {
 	return currentScore;
 }
+
+int Board::heuristic2() const {
+	int emptyCells = countEmptyCells();
+
+	int adjacentNums = 0;
+
+	for (int i = 0; i < boardSize; i++) {
+		for (int j = 0; j < boardSize; j++) {
+			if (j + i < boardSize && grid[i][j] != 0 && grid[i][j] == grid[i][j+1]) {
+				adjacentNums++;
+			}
+			if (i + 1 < boardSize && grid[i][j] != 0 && grid[i][j] == grid[i+1][j]) {
+				adjacentNums++;
+			}
+		}
+	}
+
+	return currentScore + (emptyCells * 128) + (adjacentNums * 64);
+}
+
 
 #endif /* BOARD_H_ */
