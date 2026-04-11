@@ -1,10 +1,3 @@
-/*
- * Board.h
- *
- *  Created on: 12/01/2026
- *      Author: dongmo
- */
-
 #ifndef BOARD_H_
 #define BOARD_H_
 

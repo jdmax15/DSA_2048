@@ -1,9 +1,3 @@
-/*
- * HumanPlayer.h
- *
- *  Created on: 12/01/2026
- *      Author: dongmo
- */
 
 #ifndef HUMANPLAYER_H_
 #define HUMANPLAYER_H_

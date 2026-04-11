@@ -1,17 +1,10 @@
-/*
- * Game.h
- *
- *  Created on: 12/01/2026
- *      Author: dongmo
- */
-
 #ifndef GAME_H_
 #define GAME_H_
 
 #include "Board.h"
 #include "Player.h"
 
-const int NUMBEROFGAMES = 1;
+const int NUMBEROFGAMES = 5;
 
 class Game {
 private:
@@ -47,6 +40,7 @@ public:
 void Game::play() {
 	int won = 0;
 	double averageScore = 0.0;
+	double totalScoreSum = 0.0;
 	board->printBoard();
 
 	int games = NUMBEROFGAMES;
@@ -66,6 +60,7 @@ void Game::play() {
 			cout << "You final score per step is " << scorePerStep << endl;
 
 			averageScore += scorePerStep;
+			totalScoreSum += totalScore;
 			board = new Board(board->getBoardSize());
 			games--;
 			continue;
@@ -78,6 +73,7 @@ void Game::play() {
 				 << endl;
 
 			averageScore += board->getScoreperStep();
+			totalScoreSum += board->getCurrentScore();
 			board = new Board(board->getBoardSize());
 			games--;
 			continue;
@@ -100,6 +96,9 @@ void Game::play() {
 	averageScore /= (double)(NUMBEROFGAMES);
 	cout << "Average score per step over " << NUMBEROFGAMES
 		 << " games: " << averageScore << endl;
+
+	cout << "Average total score over " << NUMBEROFGAMES << " games: " 
+		 << totalScoreSum / NUMBEROFGAMES << endl;
 }
 
 #endif /* GAME_H_ */

@@ -1,10 +1,3 @@
-/*
- * Main.cpp
- *
- *  Created on: 12/01/2026
- *      Author: dongmo
- */
-
 #include <ctime>
 #include <iostream>
 
@@ -14,6 +7,7 @@ using namespace std;
 #include "Game.h"
 #include "MonteCarloPlayer.h"
 #include "BestFirstPlayer.h"
+#include "BestFirstPlayer2.h"
 #include "HumanPlayer.h"
 #include "RandomPlayer.h"
 #include "Player.h"
@@ -51,6 +45,9 @@ int main() {
 	}
 	else if (choice == 3) {
 		p = new BestFirstPlayer;
+	}
+	else if (choice == 4) {
+		p = new BestFirstPlayer2;
 	}
 	else if (choice == 5) {
 		p = new MonteCarloPlayer;

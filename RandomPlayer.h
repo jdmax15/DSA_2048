@@ -1,5 +1,3 @@
-
-
 #ifndef RANDOMPLAYER_H_
 #define RANDOMPLAYER_H_
 
