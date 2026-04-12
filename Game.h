@@ -45,7 +45,7 @@ void Game::play() {
 
 	int games = NUMBEROFGAMES;
 	while (!won && games > 0) {
-		cout << "Empty Cells: " << board->countEmptyCells() << endl; // I ADDED THIS TO SHOW EMPTY CELLS EACH TURN.
+		cout << "Empty Cells: " << board->countEmptyCells() << endl;
 		if (board->hasWon()) {
 			cout << "Congratulations! You have reached the target number at step "
 				 << board->getCurrentSteps() << "." << endl;
