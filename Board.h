@@ -22,7 +22,7 @@ private:
 	int currentScore;
 	int currentSteps;
 	Tile newTile;
-	int target = 2048;
+	int target = 999999;
 	int bonus = 20000;
 
 public:
@@ -281,19 +281,29 @@ int Board::heuristic2() const {
 	int emptyCells = countEmptyCells();
 
 	int adjacentNums = 0;
-
 	for (int i = 0; i < boardSize; i++) {
 		for (int j = 0; j < boardSize; j++) {
-			if (j + i < boardSize && grid[i][j] != 0 && grid[i][j] == grid[i][j+1]) {
+			if (j + 1 < boardSize && grid[i][j] != 0 && grid[i][j] == grid[i][j+1])
 				adjacentNums++;
-			}
-			if (i + 1 < boardSize && grid[i][j] != 0 && grid[i][j] == grid[i+1][j]) {
+			if (i + 1 < boardSize && grid[i][j] != 0 && grid[i][j] == grid[i+1][j])
 				adjacentNums++;
-			}
 		}
 	}
 
-	return currentScore + (emptyCells * 128) + (adjacentNums * 64);
+	int maxTile = 0;
+	for (int i = 0; i < boardSize; i++)
+		for (int j = 0; j < boardSize; j++)
+			if (grid[i][j] > maxTile)
+				maxTile = grid[i][j];
+
+	bool inCorner = (grid[0][0] == maxTile ||
+					 grid[0][boardSize-1] == maxTile ||
+					 grid[boardSize-1][0] == maxTile ||
+					 grid[boardSize-1][boardSize-1] == maxTile);
+
+	int cornerBonus = inCorner ? maxTile * 2 : 0;
+
+	return currentScore + (emptyCells * 128) + (adjacentNums * 64) + cornerBonus;
 }
 
 

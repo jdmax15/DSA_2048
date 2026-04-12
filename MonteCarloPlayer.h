@@ -18,7 +18,7 @@ class MonteCarloPlayer: public Player {
             name = "MonteCarloPlayer (Hueristic)";
         }
         char getMove(const Board&);
-        virtual double simulation(const Board&);
+        double simulation(const Board&);
 };
 
 char MonteCarloPlayer::getMove(const Board& board) {
@@ -43,7 +43,7 @@ char MonteCarloPlayer::getMove(const Board& board) {
 };
 
 double MonteCarloPlayer::simulation(const Board& board) {
-    int simulation_runs = 100;
+    int simulation_runs = 200;
     double total_score = 0.0;
     vector<char> directions = {'u', 'd', 'l', 'r'};
 
