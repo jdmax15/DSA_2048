@@ -15,7 +15,7 @@ using namespace std;
 class MonteCarloPlayer: public Player {
 	public:
         MonteCarloPlayer() {
-            name = "MonteCarloPlayer (Hueristic)";
+            name = "MonteCarloPlayer";
         }
         char getMove(const Board&);
         double simulation(const Board&);
@@ -43,7 +43,7 @@ char MonteCarloPlayer::getMove(const Board& board) {
 };
 
 double MonteCarloPlayer::simulation(const Board& board) {
-    int simulation_runs = 200;
+    int simulation_runs = 50;
     double total_score = 0.0;
     vector<char> directions = {'u', 'd', 'l', 'r'};
 

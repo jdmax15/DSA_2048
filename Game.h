@@ -4,7 +4,7 @@
 #include "Board.h"
 #include "Player.h"
 
-const int NUMBEROFGAMES = 5;
+const int NUMBEROFGAMES = 10;
 
 class Game {
 private:
@@ -41,6 +41,7 @@ void Game::play() {
 	int won = 0;
 	double averageScore = 0.0;
 	double totalScoreSum = 0.0;
+	vector<int> totalScores;
 	board->printBoard();
 
 	int games = NUMBEROFGAMES;
@@ -61,6 +62,7 @@ void Game::play() {
 
 			averageScore += scorePerStep;
 			totalScoreSum += totalScore;
+			totalScores.push_back(totalScore);
 			board = new Board(board->getBoardSize());
 			games--;
 			continue;
@@ -74,6 +76,7 @@ void Game::play() {
 
 			averageScore += board->getScoreperStep();
 			totalScoreSum += board->getCurrentScore();
+			totalScores.push_back(board->getCurrentScore());
 			board = new Board(board->getBoardSize());
 			games--;
 			continue;
@@ -99,6 +102,12 @@ void Game::play() {
 
 	cout << "Average total score over " << NUMBEROFGAMES << " games: " 
 		 << totalScoreSum / NUMBEROFGAMES << endl;
+
+	cout << "Game Score History: ";
+	for (int i = 0; i < totalScores.size(); i++) {
+		cout << totalScores[i] << " ";
+	}
+	cout << endl << endl;
 }
 
 #endif /* GAME_H_ */

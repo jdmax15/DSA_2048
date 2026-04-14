@@ -1,5 +1,5 @@
-#ifndef BESTFIRSTPLAYER_H_
-#define BESTFIRSTPLAYER_H_
+#ifndef SMARTPLAYER_H_
+#define SMARTPLAYER_H_
 
 using namespace std;
 
@@ -19,15 +19,15 @@ struct BestMove {
     }
 };
 
-class BestFirstPlayer: public Player {
+class SmartPlayer: public Player {
 	public:
-        BestFirstPlayer() {
-            name = "Best First Player (Hueristic)";
+        SmartPlayer() {
+            name = "Best First Player (Best Score Hueristic)";
         }
         char getMove(const Board&);
 };
 
-char BestFirstPlayer::getMove(const Board& board) {
+char SmartPlayer::getMove(const Board& board) {
 
     priority_queue<BestMove> moves;
     vector<char> directions = {'u', 'd', 'l', 'r'};
