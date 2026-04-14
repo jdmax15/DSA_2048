@@ -15,7 +15,7 @@ using namespace std;
 class MonteCarloPlayer: public Player {
 	public:
         MonteCarloPlayer() {
-            name = "MonteCarloPlayer (Hueristic)";
+            name = "MonteCarloPlayer";
         }
         char getMove(const Board&);
         double simulation(const Board&);
