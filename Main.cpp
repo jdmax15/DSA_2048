@@ -52,7 +52,15 @@ int main() {
 		p = new SmartPlayer2;
 	}
 	else if (choice == 5) {
-		p = new MonteCarloPlayer;
+		int runs, depth;
+		bool scores;
+		cout << "Enter number of simulations: " << endl;
+		cin >> runs;
+		cout << "Enter max depth (0 for unlimited): " << endl;
+		cin >> depth;
+		cout << "Print simulation scores each move? 1 for yes, 0 for no " << endl;
+		cin >> scores;
+		p = new MonteCarloPlayer(runs, depth, scores);
 	}
 	else if (choice == 6) {
 		p = new SmartPlayerCombination;
