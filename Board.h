@@ -303,7 +303,15 @@ int Board::heuristic2() const {
 
 	int cornerBonus = inCorner ? maxTile * 2 : 0;
 
-	return currentScore + (emptyCells * 128) + (adjacentNums * 64) + cornerBonus;
+	int mono = 0;
+	for (int i = 0; i < boardSize; i++) {
+		for (int j = 0; j < boardSize - 1; j++) {
+			if (grid[i][j] >= grid[i][j+1]) mono++;
+			if (grid[j][i] >= grid[j+1][i]) mono++;
+		}
+	}
+
+	return currentScore + (emptyCells * 128) + (adjacentNums * 64) + cornerBonus + (mono * 32);
 }
 
 

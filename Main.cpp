@@ -5,10 +5,10 @@ using namespace std;
 
 #include "Board.h"
 #include "Game.h"
-#include "SmartBFSPlayer.h"
+#include "SmartPlayerCombination.h"
 #include "MonteCarloPlayer.h"
-#include "BestFirstPlayer.h"
-#include "BestFirstPlayer2.h"
+#include "SmartPlayer.h"
+#include "SmartPlayer2.h"
 #include "HumanPlayer.h"
 #include "RandomPlayer.h"
 #include "Player.h"
@@ -28,10 +28,10 @@ int main() {
 	cout << "Choose a player to play: " << endl;
 	cout << "1. Human Player" << endl;
     cout << "2. Random Player" << endl;
-	cout << "3. Best First Player 1 (hueristic)" << endl;
-	cout << "4. Best First Player 2 (hueristic)" << endl;
+	cout << "3. Smart Player (Best Score Heuristic)" << endl;
+	cout << "4. Smart Player 2 (Looks ahead 2 levels deep)" << endl;
 	cout << "5. Monte Carlo Player" << endl;
-	cout << "6. Smart BFS Player" << endl;
+	cout << "6. Smart Player Combination (Multiple heuristics + 4 level look ahead)" << endl;
 	cout << "Others: Quit" << endl;
 
 	int choice;
@@ -46,16 +46,16 @@ int main() {
 		p = new RandomPlayer;	
 	}
 	else if (choice == 3) {
-		p = new BestFirstPlayer;
+		p = new SmartPlayer;
 	}
 	else if (choice == 4) {
-		p = new BestFirstPlayer2;
+		p = new SmartPlayer2;
 	}
 	else if (choice == 5) {
 		p = new MonteCarloPlayer;
 	}
 	else if (choice == 6) {
-		p = new SmartBFSPlayer;
+		p = new SmartPlayerCombination;
 	}
 	else {
 		return 0;

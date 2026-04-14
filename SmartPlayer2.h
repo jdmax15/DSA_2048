@@ -1,5 +1,5 @@
-#ifndef SMARTBESTFIRSTPLAYER2_H_
-#define SMARTBESTFIRSTPLAYER2_H_
+#ifndef SMARTPLAYER2_H_
+#define SMARTPLAYER2_H_
 
 using namespace std;
 
@@ -9,16 +9,17 @@ using namespace std;
 #include <cstdlib>
 #include <queue>
 #include <vector>
+#include "SmartPlayer.h"
 
-class SmartBestFirstPlayer: public Player {
+class SmartPlayer2: public Player {
 	public:
-        SmartBestFirstPlayer() {
-            name = "Smart Best First Player ()";
+        SmartPlayer2() {
+            name = "Best First Player 2 (Looks ahead 2 levels deep)";
         }
         char getMove(const Board&);
 };
 
-char SmartBestFirstPlayer::getMove(const Board& board) {
+char SmartPlayer2::getMove(const Board& board) {
 
     vector<char> directions = {'u', 'd', 'l', 'r'};
     char bestMove = directions[0];
@@ -28,7 +29,8 @@ char SmartBestFirstPlayer::getMove(const Board& board) {
         Board b1(board);
         b1.makeMove(directions[i]);
 
-        if (b1.getCurrentScore() == board.getCurrentScore() &&
+        if (board.countEmptyCells() == 0 &&
+            b1.getCurrentScore() == board.getCurrentScore() &&
             b1.countEmptyCells() == board.countEmptyCells()) continue;
 
         for (int j = 0; j < directions.size(); j++) {
