@@ -49,19 +49,15 @@ char SmartPlayerCombination::getMove(const Board& board) {
                     b4.makeMove(directions[l]);
                     b4.addNewTile();
 
-                    if (b4.heuristic2() > bestScore) {
-                    bestScore = b4.heuristic2();
-                    bestMove = directions[i];
-
-
-
-
+                    int score = b4.heuristic2();
+                    if (score > bestScore) {
+                        bestScore = score;
+                        bestMove = directions[i];
+                    }
                 }
             }
         }
     }
-
-}
 
     return bestMove;
 

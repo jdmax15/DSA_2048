@@ -22,7 +22,7 @@ private:
 	int currentScore;
 	int currentSteps;
 	Tile newTile;
-	int target = 999999;
+	int target = 2048;
 	int bonus = 20000;
 
 public:
@@ -280,38 +280,43 @@ int Board::heuristic() const {
 int Board::heuristic2() const {
 	int emptyCells = countEmptyCells();
 
-	int adjacentNums = 0;
+	int readyToMerge = 0;
 	for (int i = 0; i < boardSize; i++) {
 		for (int j = 0; j < boardSize; j++) {
 			if (j + 1 < boardSize && grid[i][j] != 0 && grid[i][j] == grid[i][j+1])
-				adjacentNums++;
+				readyToMerge += grid[i][j];
 			if (i + 1 < boardSize && grid[i][j] != 0 && grid[i][j] == grid[i+1][j])
-				adjacentNums++;
+				readyToMerge += grid[i][j];
 		}
 	}
 
-	int maxTile = 0;
-	for (int i = 0; i < boardSize; i++)
-		for (int j = 0; j < boardSize; j++)
-			if (grid[i][j] > maxTile)
-				maxTile = grid[i][j];
+	int biggestNum = 0;
+	for (int i = 0; i < boardSize; i++) {
+		for (int j = 0; j < boardSize; j++) {
+			if (grid[i][j] > biggestNum) {
+				biggestNum = grid[i][j];
+			}
+		}
+	}
 
-	bool inCorner = (grid[0][0] == maxTile ||
-					 grid[0][boardSize-1] == maxTile ||
-					 grid[boardSize-1][0] == maxTile ||
-					 grid[boardSize-1][boardSize-1] == maxTile);
+	int cornerBonus = 0;
+	if (grid[0][0] == biggestNum ||
+		grid[0][boardSize-1] == biggestNum ||
+		grid[boardSize-1][0] == biggestNum ||
+		grid[boardSize-1][boardSize-1] == biggestNum) {
+		cornerBonus = biggestNum * 2;
+	}
 
-	int cornerBonus = inCorner ? maxTile * 2 : 0;
-
-	int mono = 0;
+	int smoothness = 0;
 	for (int i = 0; i < boardSize; i++) {
 		for (int j = 0; j < boardSize - 1; j++) {
-			if (grid[i][j] >= grid[i][j+1]) mono++;
-			if (grid[j][i] >= grid[j+1][i]) mono++;
+			if (grid[i][j] >= grid[i][j+1]) smoothness++;
+			if (grid[j][i] >= grid[j+1][i]) smoothness++;
 		}
 	}
 
-	return currentScore + (emptyCells * 128) + (adjacentNums * 64) + cornerBonus + (mono * 32);
+	int total = currentScore + (emptyCells * 130) + (readyToMerge * 3) + (cornerBonus * 50) + (smoothness * 140);
+	return total;
 }
 
 
